@@ -1,0 +1,144 @@
+# Cursor IDE Rules for mac-say-mcp Development
+
+## Project Context
+This is a Model Context Protocol (MCP) server for text-to-speech using macOS `say` command. It provides TTS capabilities through MCP tools for various clients (Claude, VS Code, etc.). **macOS ONLY** - requires the `say` command.
+
+## Development Workflow Rules
+
+### 🧪 Testing Requirements
+- **ALWAYS test manually after ANY code change** with real MCP clients
+- **Test ALL TTS tools** (speak, save_audio, list_voices, voice_demo, system_info)
+- **Test with different voices, rates, and text inputs**
+- **Test audio file generation** and verify file creation
+- **Test error cases** (invalid voices, long text, special characters)
+- **Clean up generated audio files** after testing
+
+### 📝 Documentation Requirements
+- **Update README.md** for every significant change
+- **Document new MCP tools** with proper JSON schema and examples
+- **Document macOS compatibility** requirements
+- **Include tool usage examples** in JSON format
+- **Update voice support** information when applicable
+- **All documentation and comments must be in English**
+
+### 🔧 Code Quality Rules
+- **Follow ES6+ module syntax** (import/export)
+- **Handle error cases gracefully** with proper error messages
+- **Use meaningful variable and function names**
+- **Add JSDoc comments** for complex functions
+- **Validate MCP tool parameters** before processing
+- **Ensure consistent async/await patterns**
+- **All code comments must be in English**
+
+### 📁 File Organization
+- **Main server code** in `index.js` (entry point)
+- **Audio files** generated in `audio/` directory
+- **Documentation** in `README.md` and `AI_MANUAL_TESTING_AGENT.md`
+- **Keep structure simple** - single file architecture for now
+- **Audio directory** auto-created if missing
+
+### 🚀 Enhancement Process
+1. **Identify TTS requirement** clearly in documentation
+2. **Test with `say` command** manually first
+3. **Implement MCP tool** with proper schema validation
+4. **Test with MCP client** (Claude Desktop, VS Code MCP)
+5. **Update README.md** with tool examples
+6. **Test edge cases** (long text, special chars, invalid params)
+
+### ⚠️ Critical Reminders
+- **macOS ONLY** - this server will not work on Windows/Linux
+- **`say` command** must be available on the system
+- **Audio directory permissions** must be writable
+- **No external dependencies** beyond MCP SDK
+- **Error messages** should guide users to fix issues
+- **All documentation and code comments must be in English**
+
+### 🎯 Specific to This Project
+- **MCP tool schemas** must match `say` command capabilities
+- **Voice validation** against system available voices
+- **Audio format support** (aiff, wav, mp4) with proper `say` flags
+- **Rate limits** (50-500 WPM) enforced in schemas
+- **File naming** should be safe and predictable
+- **Error handling** for `say` command failures
+
+### 📋 Before Committing Checklist
+- [ ] Manual testing with MCP client completed
+- [ ] All 5 TTS tools tested (speak, save_audio, list_voices, voice_demo, system_info)
+- [ ] README.md updated with changes
+- [ ] Code follows ES6+ patterns
+- [ ] Error cases handled properly
+- [ ] Audio files generated correctly
+- [ ] No debug console.log statements left
+- [ ] All documentation and comments are in English
+
+### 🔍 Code Review Focus Areas
+- **MCP protocol compatibility** maintenance
+- **macOS `say` command** integration correctness
+- **Error handling** for TTS failures
+- **File system operations** safety
+- **Parameter validation** completeness
+- **Language consistency** (English only)
+
+## Example Commands
+```bash
+# Start the MCP server
+npm start
+
+# Install globally
+npm install -g .
+
+# Run with custom settings
+TTS_DEFAULT_VOICE=Samantha TTS_DEFAULT_RATE=180 npm start
+
+# Test say command manually
+say -v Alex "Hello world"
+say -v "?" # List available voices
+```
+
+## Language Requirements
+- **All documentation** must be in English
+- **All code comments** must be in English  
+- **All commit messages** should be in English
+- **All variable and function names** should use English words
+
+## TTS Testing Scenarios
+Test these scenarios regularly:
+
+### Basic Functionality
+- Short text (< 50 words) with default voice
+- Long text (> 500 words) with various voices  
+- Special characters (emojis, punctuation, numbers)
+- Multiple languages with appropriate voices
+
+### Audio File Generation
+- All three formats (aiff, wav, mp4)
+- Different filenames (with/without special chars)
+- File size validation and playback testing
+- Directory permissions and cleanup
+
+### Voice Management
+- List all voices without filter
+- Filter voices by language (en, es, fr, etc.)
+- Test voice demo with system voices
+- Handle non-existent voice names gracefully
+
+### Error Conditions
+- Empty text input
+- Invalid voice names
+- Extremely high/low speech rates
+- Disk space issues for audio files
+- Invalid file permissions
+
+## macOS Compatibility Notes
+- Test on different macOS versions when possible
+- Document voice availability differences
+- Note system-specific voice behaviors
+- Handle `say` command variations across versions
+
+## Remember  
+Every change, no matter how small, should be:
+1. **Tested** - manually with real TTS output
+2. **Documented** - in README.md (in English) 
+3. **Verified** - with actual MCP client usage
+
+This ensures the MCP server remains reliable and provides consistent text-to-speech capabilities across different usage scenarios.

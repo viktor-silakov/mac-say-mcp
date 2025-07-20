@@ -1,0 +1,6 @@
+node_modules/
+.zencoder
+audio
+dist/
+*.tsbuildinfo
+.DS_Store

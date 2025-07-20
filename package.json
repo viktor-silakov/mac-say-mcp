@@ -1,0 +1,62 @@
+{
+  "name": "mac-say-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for text-to-speech using macOS say command",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mac-say-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node18 --format=esm --outfile=dist/index.js --external:@modelcontextprotocol/sdk --banner:js='#!/usr/bin/env node'",
+    "build:watch": "npm run build -- --watch",
+    "start": "npm run build && node dist/index.js",
+    "dev": "npm run build:watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run clean",
+    "release": "release-it",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major",
+    "release:beta": "release-it --preRelease=beta",
+    "release:dry": "release-it --dry-run",
+    "prerelease": "npm run typecheck && npm run build",
+    "postrelease": "echo 'Release completed! Check https://www.npmjs.com/package/mac-say-mcp'",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "esbuild": "^0.19.0",
+    "typescript": "^5.3.0",
+    "release-it": "^17.0.0",
+    "@release-it/conventional-changelog": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "macos",
+    "say",
+    "mcp",
+    "model-context-protocol",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mac-say-mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mac-say-mcp/issues"
+  },
+  "homepage": "https://github.com/yourusername/mac-say-mcp#readme"
+}

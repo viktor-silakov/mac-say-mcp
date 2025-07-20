@@ -1,0 +1,54 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "requireCleanWorkingDir": true,
+    "requireUpstream": true
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}",
+    "releaseNotes": null,
+    "autoGenerate": true,
+    "draft": false,
+    "preRelease": false,
+    "web": true
+  },
+  "npm": {
+    "publish": true,
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "hooks": {
+    "before:init": [
+      "echo 'Starting release process...'",
+      "npm run typecheck",
+      "npm run build",
+      "npm test || echo 'No tests defined, skipping...'"
+    ],
+    "before:release": [
+      "npm run build"
+    ],
+    "after:bump": [
+      "echo 'Version bumped to ${version}'"
+    ],
+    "after:git:release": [
+      "echo 'Git tag v${version} created'"
+    ],
+    "after:github:release": [
+      "echo 'GitHub release v${version} published'"
+    ],
+    "after:npm:release": [
+      "echo 'Package v${version} published to npm'"
+    ],
+    "after:release": [
+      "echo 'Release v${version} completed successfully!'"
+    ]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}
