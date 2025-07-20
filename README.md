@@ -198,8 +198,8 @@ Add to your `claude_desktop_config.json`:
   "mcp.servers": [
     {
       "name": "mac-say-mcp",
-      "command": "node",
-      "args": ["/path/to/mac-say-mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "mac-say-mcp@latest"]
     }
   ]
 }
@@ -213,8 +213,8 @@ Add to your Cursor settings or create a `.cursormcp` configuration file:
 {
   "mcpServers": {
     "mac-say-mcp": {
-      "command": "node",
-      "args": ["/path/to/mac-say-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "mac-say-mcp@latest"],
       "env": {
         "TTS_DEFAULT_VOICE": "Alex",
         "TTS_DEFAULT_RATE": "200"
@@ -230,8 +230,8 @@ Alternatively, use the built-in MCP server configuration in Cursor:
 2. Go to "MCP Servers" 
 3. Add a new server:
    - **Name**: `mac-say-mcp`
-   - **Command**: `node`
-   - **Args**: `/path/to/mac-say-mcp/dist/index.js`
+   - **Command**: `npx`
+   - **Args**: `-y mac-say-mcp@latest`
 
 ### Zencoder
 
@@ -241,27 +241,13 @@ For Zencoder AI assistant integration, add to your MCP configuration:
 {
   "servers": {
     "mac-say-mcp": {
-      "command": "node",
-      "args": ["/path/to/mac-say-mcp/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "mac-say-mcp@latest"],
       "description": "Text-to-speech server using macOS say command",
       "env": {
         "TTS_DEFAULT_VOICE": "Alex",
         "TTS_DEFAULT_RATE": "200"
       }
-    }
-  }
-}
-```
-
-Or using the global installation:
-
-```json
-{
-  "servers": {
-    "mac-say-mcp": {
-      "command": "mac-say-mcp",
-      "args": [],
-      "description": "Text-to-speech server using macOS say command"
     }
   }
 }
