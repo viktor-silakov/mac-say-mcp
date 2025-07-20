@@ -302,12 +302,80 @@ Full TypeScript support with:
 - **TypeScript**: 5.3.0 or higher
 - **esbuild**: 0.19.0 or higher
 
+## Release Management
+
+This project uses automated releases with [release-it](https://github.com/release-it/release-it) and conventional changelog generation.
+
+### Creating Releases
+
+```bash
+# Patch release (1.0.0 → 1.0.1) - for bug fixes
+npm run release:patch
+
+# Minor release (1.0.0 → 1.1.0) - for new features  
+npm run release:minor
+
+# Major release (1.0.0 → 2.0.0) - for breaking changes
+npm run release:major
+
+# Test release without publishing
+npm run release:dry
+
+# Local testing (no publish/push)
+npm run release:local:dry
+```
+
+### Changelog Generation
+
+The project automatically generates:
+- **CHANGELOG.md** from conventional commit messages
+- **GitHub Release Notes** from the latest changelog entries
+
+```bash
+# Generate changelog for latest version only
+npm run changelog
+
+# Update entire CHANGELOG.md file
+npm run changelog:all
+```
+
+### Commit Message Format
+
+Use [conventional commits](https://www.conventionalcommits.org/) for automatic changelog generation:
+
+```bash
+# Features
+git commit -m "feat: add new voice filtering option"
+
+# Bug fixes  
+git commit -m "fix: resolve audio file generation error"
+
+# Documentation
+git commit -m "docs: update installation instructions"
+
+# Breaking changes
+git commit -m "feat!: change TTS API interface"
+```
+
+### Release Process
+
+1. **Make changes** with conventional commit messages
+2. **Run tests** and type checking: `npm run typecheck`
+3. **Create release**: `npm run release:patch` (or minor/major)
+4. **Automatic steps**:
+   - Version bump in package.json
+   - CHANGELOG.md update
+   - Git commit and tag
+   - GitHub release with changelog
+   - npm package publication
+
 ## Contributing
 
 1. Make changes in `src/index.ts`
-2. Run `npm run typecheck` to verify types
-3. Test with `npm run build && npm start`
-4. Update documentation as needed
+2. Use conventional commit messages
+3. Run `npm run typecheck` to verify types
+4. Test with `npm run build && npm start`
+5. Update documentation as needed
 
 ## License
 

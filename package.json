@@ -23,6 +23,8 @@
     "release:dry": "release-it --dry-run",
     "release:local": "release-it --config .release-it.local.json",
     "release:local:dry": "release-it --config .release-it.local.json --dry-run",
+    "changelog": "conventional-changelog -p conventionalcommits -r 1",
+    "changelog:all": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s",
     "prerelease": "npm run typecheck && npm run build",
     "postrelease": "echo 'Release completed! Check https://www.npmjs.com/package/mac-say-mcp'",
     "version:patch": "npm version patch --no-git-tag-version",
@@ -37,7 +39,8 @@
     "esbuild": "^0.19.0",
     "typescript": "^5.3.0",
     "release-it": "^17.0.0",
-    "@release-it/conventional-changelog": "^8.0.0"
+    "@release-it/conventional-changelog": "^8.0.0",
+    "conventional-changelog-cli": "^4.1.0"
   },
   "engines": {
     "node": ">=18.0.0"

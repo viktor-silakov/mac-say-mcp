@@ -9,8 +9,8 @@
   "github": {
     "release": true,
     "releaseName": "v${version}",
-    "releaseNotes": null,
-    "autoGenerate": true,
+    "releaseNotes": "npx conventional-changelog -p conventionalcommits -r 1",
+    "autoGenerate": false,
     "draft": false,
     "preRelease": false,
     "web": true
@@ -49,7 +49,10 @@
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "conventionalcommits",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n",
+      "releaseCount": 0,
+      "skipUnstable": true
     }
   }
 }
