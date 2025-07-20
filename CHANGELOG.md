@@ -1,4 +1,17 @@
+# Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
+## [1.0.2](https://github.com/yourusername/mac-say-mcp/compare/v1.0.1...v1.0.2) (2025-07-20)
+
+
+### Features
+
+* enhance release management with changelog generation and update release-it configuration ([44f0d8c](https://github.com/yourusername/mac-say-mcp/commit/44f0d8c37fa29a090080fa6de76d60d13f534fe4))
 
 ## 1.0.1 (2025-07-20)
 
@@ -9,12 +22,6 @@
 * complete release-it setup with local testing configuration ([35c54e9](https://github.com/yourusername/mac-say-mcp/commit/35c54e9db1e26b8dec94af1b623b7854bcb6e336))
 * initial release with TypeScript setup and release automation ([784d380](https://github.com/yourusername/mac-say-mcp/commit/784d38053e95b02fcb2ade52132f6b4a73b847e1))
 
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - TBD
 
