@@ -3,14 +3,22 @@
     "commitMessage": "chore: release v${version}",
     "tagName": "v${version}",
     "requireCleanWorkingDir": true,
-    "requireUpstream": false,
-    "push": false
+    "requireUpstream": true,
+    "push": true
   },
   "github": {
-    "release": false
+    "release": true,
+    "releaseName": "v${version}",
+    "releaseNotes": null,
+    "autoGenerate": true,
+    "draft": false,
+    "preRelease": false,
+    "web": true
   },
   "npm": {
-    "publish": false
+    "publish": true,
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "hooks": {
     "before:init": [

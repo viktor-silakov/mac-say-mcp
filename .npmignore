@@ -4,6 +4,7 @@
 .vscode
 .cursorrules
 .release-it.json
+.release-it.local.json
 audio/*.aiff
 audio/*.wav
 audio/*.mp4

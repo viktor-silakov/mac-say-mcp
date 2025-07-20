@@ -21,6 +21,8 @@
     "release:major": "release-it major",
     "release:beta": "release-it --preRelease=beta",
     "release:dry": "release-it --dry-run",
+    "release:local": "release-it --config .release-it.local.json",
+    "release:local:dry": "release-it --config .release-it.local.json --dry-run",
     "prerelease": "npm run typecheck && npm run build",
     "postrelease": "echo 'Release completed! Check https://www.npmjs.com/package/mac-say-mcp'",
     "version:patch": "npm version patch --no-git-tag-version",

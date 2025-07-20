@@ -2,6 +2,13 @@
 
 This document describes how to release new versions of mac-say-mcp.
 
+## Quick Start
+
+1. **Test locally first**: `npm run release:local:dry`
+2. **Make a patch release**: `npm run release:patch`
+3. **Make a minor release**: `npm run release:minor`  
+4. **Make a major release**: `npm run release:major`
+
 ## Prerequisites
 
 1. Make sure you have push access to the repository
@@ -40,6 +47,17 @@ npm run release:beta
 To see what would happen without actually releasing:
 ```bash
 npm run release:dry
+```
+
+## Local Testing
+
+For testing the release process locally without pushing to remote or publishing:
+```bash
+# Local dry run (recommended first step)
+npm run release:local:dry
+
+# Local release (no remote push, no npm publish)
+npm run release:local
 ```
 
 ## What Happens During Release

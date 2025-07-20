@@ -1,0 +1,38 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "requireCleanWorkingDir": true,
+    "requireUpstream": false,
+    "push": false
+  },
+  "github": {
+    "release": false
+  },
+  "npm": {
+    "publish": false
+  },
+  "hooks": {
+    "before:init": [
+      "echo 'Starting LOCAL release process...'",
+      "npm run typecheck",
+      "npm run build",
+      "npm test || echo 'No tests defined, skipping...'"
+    ],
+    "before:release": [
+      "npm run build"
+    ],
+    "after:bump": [
+      "echo 'Version bumped to ${version} (LOCAL ONLY)'"
+    ],
+    "after:release": [
+      "echo 'LOCAL release v${version} completed successfully!'"
+    ]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}
