@@ -39,6 +39,31 @@ npm install -g .
 mac-say-mcp
 ```
 
+#### NPM Package Installation
+
+For MCP clients, you can use the npm package directly with `npx`:
+
+```json
+{
+  "mcpServers": {
+    "mac-say-mcp": {
+      "command": "npx",
+      "args": ["-y", "mac-say-mcp@latest"],
+      "env": {
+        "TTS_DEFAULT_VOICE": "Alex",
+        "TTS_DEFAULT_RATE": "200"
+      }
+    }
+  }
+}
+```
+
+This approach:
+- ✅ Always uses the latest published version
+- ✅ No need for local builds or global installation
+- ✅ Automatic package installation with `-y` flag
+- ✅ Perfect for CI/CD and shared configurations
+
 ### Development
 
 ```bash
