@@ -1,6 +1,6 @@
 {
   "name": "mac-say-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MCP Server for text-to-speech using macOS say command",
   "type": "module",
   "main": "dist/index.js",
