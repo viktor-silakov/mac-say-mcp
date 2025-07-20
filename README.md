@@ -15,6 +15,7 @@ MCP Server for text-to-speech using macOS `say` command, written in TypeScript a
 
 ### Installation
 
+#### Local Development
 ```bash
 # Install dependencies
 npm install
@@ -24,6 +25,18 @@ npm run build
 
 # Start the server
 npm start
+```
+
+#### Global Installation
+```bash
+# Install globally from npm (when published)
+npm install -g mac-say-mcp
+
+# Or install from local directory
+npm install -g .
+
+# Use directly
+mac-say-mcp
 ```
 
 ### Development
@@ -132,6 +145,8 @@ node dist/index.js --defaultRate 250
 
 ## MCP Client Setup
 
+> **Note**: Replace `/path/to/mac-say-mcp` with the actual path to your project directory. Use `pwd` in the project directory to get the full path.
+
 ### Claude Desktop
 
 Add to your `claude_desktop_config.json`:
@@ -162,6 +177,68 @@ Add to your `claude_desktop_config.json`:
       "args": ["/path/to/mac-say-mcp/dist/index.js"]
     }
   ]
+}
+```
+
+### Cursor IDE
+
+Add to your Cursor settings or create a `.cursormcp` configuration file:
+
+```json
+{
+  "mcpServers": {
+    "mac-say-mcp": {
+      "command": "node",
+      "args": ["/path/to/mac-say-mcp/dist/index.js"],
+      "env": {
+        "TTS_DEFAULT_VOICE": "Alex",
+        "TTS_DEFAULT_RATE": "200"
+      }
+    }
+  }
+}
+```
+
+Alternatively, use the built-in MCP server configuration in Cursor:
+
+1. Open Cursor Settings
+2. Go to "MCP Servers" 
+3. Add a new server:
+   - **Name**: `mac-say-mcp`
+   - **Command**: `node`
+   - **Args**: `/path/to/mac-say-mcp/dist/index.js`
+
+### Zencoder
+
+For Zencoder AI assistant integration, add to your MCP configuration:
+
+```json
+{
+  "servers": {
+    "mac-say-mcp": {
+      "command": "node",
+      "args": ["/path/to/mac-say-mcp/dist/index.js"],
+      "description": "Text-to-speech server using macOS say command",
+      "env": {
+        "TTS_DEFAULT_VOICE": "Alex",
+        "TTS_DEFAULT_RATE": "200"
+      }
+    }
+  }
+}
+```
+
+Or using the global installation:
+
+```json
+{
+  "servers": {
+    "mac-say-mcp": {
+      "command": "mac-say-mcp",
+      "args": [],
+      "description": "Text-to-speech server using macOS say command"
+    }
+  }
 }
 ```
 
