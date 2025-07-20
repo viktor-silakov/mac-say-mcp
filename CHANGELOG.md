@@ -1,3 +1,14 @@
+
+
+## 1.0.1 (2025-07-20)
+
+
+### Features
+
+* add release-it configuration for automated releases ([4f5386a](https://github.com/yourusername/mac-say-mcp/commit/4f5386a1780e8ecd18e2745e45b20eb1c75dbbe0))
+* complete release-it setup with local testing configuration ([35c54e9](https://github.com/yourusername/mac-say-mcp/commit/35c54e9db1e26b8dec94af1b623b7854bcb6e336))
+* initial release with TypeScript setup and release automation ([784d380](https://github.com/yourusername/mac-say-mcp/commit/784d38053e95b02fcb2ade52132f6b4a73b847e1))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
