@@ -1,95 +1,267 @@
-# mac-say-mcp
+# Mac Say MCP - TypeScript Edition
 
-A Model Context Protocol (MCP) server for text-to-speech using macOS say command.
+MCP Server for text-to-speech using macOS `say` command, written in TypeScript and built with esbuild.
 
-## Installation
+## Features
 
-```bash
-npm install -g mac-say-mcp
-```
+- 🎵 **Text-to-Speech**: Convert text to speech instantly
+- 🔊 **Audio File Generation**: Save TTS as AIFF, WAV, or MP4 files  
+- 🗣️ **Voice Management**: List and demo system voices
+- ⚙️ **System Info**: Get TTS capabilities and configuration
+- 🚀 **TypeScript**: Full type safety and modern development experience
+- 📦 **Fast Build**: Lightning-fast builds with esbuild
 
-## Usage
+## Quick Start
 
-### Starting the server
-
-```bash
-mac-say-mcp
-```
-
-You can also set default voice and rate:
+### Installation
 
 ```bash
-# Using environment variables
-TTS_DEFAULT_VOICE=Samantha TTS_DEFAULT_RATE=180 mac-say-mcp
+# Install dependencies
+npm install
 
-# Using command line arguments
-mac-say-mcp --defaultRate 180
+# Build the project
+npm run build
+
+# Start the server
+npm start
 ```
 
-### Available Tools
+### Development
 
-The server provides the following MCP tools:
+```bash
+# Type checking
+npm run typecheck
 
-#### tts_speak
+# Build in watch mode
+npm run build:watch
 
-Convert text to speech and play it immediately.
+# Development mode (watch + restart)
+npm run dev
+```
+
+## Available Scripts
+
+- `npm run build` - Build the TypeScript code with esbuild
+- `npm run build:watch` - Build in watch mode for development
+- `npm run start` - Build and start the MCP server
+- `npm run dev` - Development mode with auto-rebuild
+- `npm run clean` - Clean build artifacts
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run prod` - Production build with minification
+
+## MCP Tools
+
+### 1. `tts_speak`
+Convert text to speech and play immediately:
 
 ```json
 {
-  "text": "Hello, world!",
-  "voice": "Alex",  // optional, default: system default
-  "rate": 200       // optional, words per minute
+  "name": "tts_speak",
+  "arguments": {
+    "text": "Hello, world!",
+    "voice": "Alex",
+    "rate": 200
+  }
 }
 ```
 
-#### tts_save_audio
-
-Convert text to speech and save as audio file.
+### 2. `tts_save_audio`
+Save text-to-speech as audio file:
 
 ```json
 {
-  "text": "Hello, world!",
-  "filename": "greeting",
-  "voice": "Alex",  // optional
-  "rate": 200,      // optional
-  "format": "aiff"  // optional, one of: aiff, wav, mp4
+  "name": "tts_save_audio", 
+  "arguments": {
+    "text": "Hello, world!",
+    "filename": "greeting",
+    "voice": "Samantha",
+    "rate": 180,
+    "format": "wav"
+  }
 }
 ```
 
-#### tts_list_voices
-
-List all available voices on the system.
+### 3. `tts_list_voices`
+List available system voices:
 
 ```json
 {
-  "language": "en"  // optional, filter by language
+  "name": "tts_list_voices",
+  "arguments": {
+    "language": "en"
+  }
 }
 ```
 
-#### tts_voice_demo
-
-Play a demo phrase with a specific voice.
+### 4. `tts_voice_demo`
+Play a demo with specific voice:
 
 ```json
 {
-  "voice": "Alex",
-  "text": "This is a demonstration"  // optional
+  "name": "tts_voice_demo",
+  "arguments": {
+    "voice": "Victoria",
+    "text": "This is a voice demonstration"
+  }
 }
 ```
 
-#### tts_system_info
-
-Get information about text-to-speech capabilities.
+### 5. `tts_system_info`
+Get system TTS information:
 
 ```json
-{}
+{
+  "name": "tts_system_info",
+  "arguments": {}
+}
 ```
+
+## Configuration
+
+Set default voice and rate via environment variables:
+
+```bash
+TTS_DEFAULT_VOICE=Samantha TTS_DEFAULT_RATE=180 npm start
+```
+
+Or via command line:
+
+```bash
+node dist/index.js --defaultRate 250
+```
+
+## MCP Client Setup
+
+### Claude Desktop
+
+Add to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "mac-say-mcp": {
+      "command": "node",
+      "args": ["/path/to/mac-say-mcp/dist/index.js"],
+      "env": {
+        "TTS_DEFAULT_VOICE": "Alex",
+        "TTS_DEFAULT_RATE": "200"
+      }
+    }
+  }
+}
+```
+
+### VS Code MCP Extension
+
+```json
+{
+  "mcp.servers": [
+    {
+      "name": "mac-say-mcp",
+      "command": "node",
+      "args": ["/path/to/mac-say-mcp/dist/index.js"]
+    }
+  ]
+}
+```
+
+## Development Architecture
+
+### Project Structure
+
+```
+mac-say-mcp/
+├── src/
+│   └── index.ts          # TypeScript source code
+├── dist/
+│   └── index.js          # Compiled JavaScript (generated)
+├── audio/                # Generated audio files
+├── tsconfig.json         # TypeScript configuration
+├── build.js              # esbuild configuration
+└── package.json          # Dependencies and scripts
+```
+
+### Type Safety
+
+Full TypeScript support with:
+- Interface definitions for all MCP tools
+- Type guards for runtime parameter validation
+- Strict type checking enabled
+- Modern ES2022 target
+
+### Build Process
+
+- **esbuild** for fast compilation and bundling
+- **External dependencies** preserved (MCP SDK)
+- **ES Modules** output for Node.js compatibility
+- **Source maps** in development mode
+- **Minification** in production mode
+
+## Audio Formats
+
+| Format | Extension | Quality | Size |
+|--------|-----------|---------|------|
+| AIFF   | `.aiff`   | High    | Large |
+| WAV    | `.wav`    | High    | Large |  
+| MP4    | `.mp4`    | Good    | Small |
+
+## Voice Parameters
+
+- **Rate**: 50-500 words per minute
+- **Voices**: System-dependent (174 on typical macOS)
+- **Languages**: Multiple languages supported
+
+## Error Handling
+
+- Parameter validation with descriptive errors
+- Type-safe error responses
+- Graceful handling of missing voices
+- File system error recovery
 
 ## Requirements
 
-- macOS (requires the `say` command)
-- Node.js 14 or higher
+- **macOS**: Required for `say` command
+- **Node.js**: 18.0.0 or higher
+- **TypeScript**: 5.3.0 or higher
+- **esbuild**: 0.19.0 or higher
+
+## Contributing
+
+1. Make changes in `src/index.ts`
+2. Run `npm run typecheck` to verify types
+3. Test with `npm run build && npm start`
+4. Update documentation as needed
 
 ## License
 
-MIT
+MIT License - see LICENSE file for details.
+
+## Troubleshooting
+
+### Build Issues
+```bash
+# Clear build cache
+npm run clean
+npm run build
+```
+
+### Type Errors
+```bash
+# Check TypeScript errors
+npm run typecheck
+```
+
+### Runtime Issues
+```bash
+# Test say command directly
+say -v Alex "Hello world"
+say -v "?" # List voices
+```
+
+### Audio File Issues
+```bash
+# Check audio directory permissions
+ls -la audio/
+```
+
+This TypeScript version provides better development experience with type safety, modern tooling, and fast builds while maintaining full compatibility with the original MCP server functionality.
